@@ -1,0 +1,68 @@
+/******************************************************************************
+ * File: 	popup.css
+ * Summary: Styles for this Chrome Extension
+ * Author: 	Little Corner Dev (https://github.com/LittleCornerDev)
+ * 
+ * Copyright (c) 2020, Little Corner Dev. All rights reserved.
+ * Use of this source code is governed by the license that can be
+ * found in the LICENSE file.
+ */
+#cnsi {
+	background-color: whitesmoke;
+	/*border: 1px solid black;
+	border-radius: 1em;*/
+	/*bottom: 0px;*/
+	color: black;
+	font-family: sans-serif;
+	/*height: 600px;*/
+	margin: 0;
+	/*overflow: scroll;*/
+	padding: 2em;
+	/*position: fixed;
+	right: 0px;
+	width: 700px;
+	z-index: 1000;*/
+}
+
+#cnsi canvas {
+	background-color: white;
+	border: 1px solid black;
+	display: block;
+	height: 100px;
+	position: static;
+	width: 100px;
+}
+
+
+#cnsi img {
+	display: none;
+}
+
+
+#cnsi label {
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 1em 0 0;
+}
+#cnsiNameNames label, #cnsiSeasonsGood label, #cnsiSeasonsBad label{
+	display: block;
+}
+
+#cnsi section {
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+}
+#cnsi section > div {
+	padding: 0.5em 0;
+}
+
+#cnsi span {
+	display: inline-block;
+}
+#cnsiSeasonsGood span {
+	color: darkgreen;
+}
+#cnsiSeasonsBad span {
+	color: darkred;
+}
