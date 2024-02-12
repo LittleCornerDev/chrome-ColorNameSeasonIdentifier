@@ -30,6 +30,10 @@
 	z-index: 99999;
 }
 
+#cnsi a {
+	color: black;
+}
+
 #cnsi canvas {
 	background-color: white;
 	border: 1px solid black;
