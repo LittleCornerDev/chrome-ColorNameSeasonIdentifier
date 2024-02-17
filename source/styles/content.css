@@ -2,7 +2,7 @@
  * File: 	content.css
  * Summary: Content styles for this Chrome Extension
  * Author: 	Little Corner Dev (https://github.com/LittleCornerDev)
- * 
+ *
  * Copyright (c) 2020, Little Corner Dev. All rights reserved.
  * Use of this source code is governed by the license that can be
  * found in the LICENSE file.
@@ -11,22 +11,22 @@
 	background-color: #fff;
 	border: 1px solid black;
 	border-radius: 15px;
-	top: 0px;
+	top: 0;
 	color: black;
+	display:flex;
 	font: inherit;
 	font-family: serif;
 	font-size: 15px;
 	height: 310px;
 	margin: 0;
-	opacity: 100%;
-	overflow-x: auto;
-	overflow-y: auto;
+	opacity: 1;
+	overflow: auto;
 	padding: 1em;
 	position: fixed;
-	right: 0px;
+	right: 0;
 	text-align: left;
 	vertical-align: top;
-	width: 750px; /*must fit all section widths */
+	width: 750px; /* must fit all section widths */
 	z-index: 99999;
 }
 
@@ -45,7 +45,6 @@
 	width: 50px;
 }
 
-
 #cnsi img {
 	display: none;
 	margin: 0;
@@ -60,22 +59,15 @@
 }
 
 #cnsi section {
-	display: inline-block;
+	justify-content: space-between;
+	flex: 1;
 	vertical-align: top;
 	margin: 0;
 	padding: 0;
 }
-#cnsi section#cnsiOrigin {
-	width: 170px;
-}
-#cnsi section#cnsiName {
-	width: 170px;
-}
-#cnsi section#cnsiSeasons {
-	width: 350px;
-}
+
 #cnsi h5 {
-	font-family: cursive; 
+	font-family: cursive;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -86,17 +78,6 @@
 	margin: 0;
 	padding: 0;
 	vertical-align: top;
-}
-#cnsi section > div#cnsiSeasonsGood, #cnsi section > div#cnsiSeasonsBad {
-	display: inline-block;
-}
-#cnsi section > div#cnsiSeasonsGood {
-	width: 130px; /*must be same as `#cnsiSeasonsGood ul li` width */
-}
-#cnsi section > div#cnsiSeasonsBad {
-	height: 150px;
-	min-width: 100px; /*must be same as `#cnsiSeasonsBad ul li` width */
-	width: 210px; /*must be same as 2 * `#cnsiSeasonsBad ul li` width plus margin/padding */
 }
 
 #cnsi small {
@@ -116,18 +97,19 @@
 	margin: 0;
 	padding: 0;
 }
+
 #cnsi ul li {
 	display: inline-block;
 	list-style: none;
 	margin: 0 0.25em 0 0;
 	padding: 0;
 }
-#cnsiSeasonsGood ul li {
+
+#cnsi-seasons-good ul li {
 	color: darkgreen;
-	width: 130px; /*must be same as `div#cnsiSeasonsGood` width */
 }
-#cnsiSeasonsBad ul li {
+
+#cnsi-seasons-bad ul li {
 	color: darkred;
-	width: 100px; /*must be same as `div#cnsiSeasonsBad` width */
 }
 
