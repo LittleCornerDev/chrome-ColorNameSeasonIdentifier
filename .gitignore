@@ -1,2 +1,11 @@
-build/
+# Dependency Modules
 node_modules/
+
+# Generated Build Fules
+build/
+
+# NYC Istanbul Code Coverage Output
+.nyc_output/
+coverage/
+
+

@@ -1,0 +1,41 @@
+{
+  "name": "cnsi",
+  "version": "0.0.3",
+  "description": "Chrome extension for identifying hex code, possible name, and possible wardrobe season for any pixel in the current tab page",
+  "main": "source/scripts/content.js",
+  "directories": {
+    "source": "source",
+    "test": "test"
+  },
+  "scripts": {
+    "lint-css": "stylelint 'source/**/*.css'",
+    "lint-js": "eslint 'source/**/*.js'",
+    "test": "nyc mocha test/unit/**/*.js",
+    "zip": "cd source/ && bestzip ../build/cnsi-$npm_package_version.zip *"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier.git"
+  },
+  "keywords": [
+    "chrome",
+    "browser",
+    "extension",
+    "color",
+    "season"
+  ],
+  "author": "LittleCornerDev",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/issues"
+  },
+  "homepage": "https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier#readme",
+  "devDependencies": {
+    "bestzip": "^2.2.0",
+    "eslint": "^8.56.0",
+    "mocha": "^10.2.0",
+    "nyc": "15.1.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}
