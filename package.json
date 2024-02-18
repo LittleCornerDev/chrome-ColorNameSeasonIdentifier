@@ -10,6 +10,7 @@
   "type": "commonjs",
   "scripts": {
     "format": "prettier . --write",
+    "lint": "npm run lint-css && npm run lint-js",
     "lint-css": "stylelint 'source/**/*.css' --fix",
     "lint-js": "eslint 'source/**/*.js' --fix && eslint 'test/**/*.js' --fix",
     "test": "jest",
