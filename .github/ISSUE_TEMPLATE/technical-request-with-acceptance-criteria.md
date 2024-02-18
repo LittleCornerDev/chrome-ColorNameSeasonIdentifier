@@ -1,8 +1,8 @@
 ---
-name: Feature Request with Acceptance Criteria
-about: Suggest a user-facing idea for this project
-title: "[feature]: enter_summary_here"
-labels: enhancement
+name: Technical Request with Acceptance Criteria
+about: Suggest a non-user-facing idea for this project.
+title: "[tech]: enter_summary_here"
+labels: tech
 assignees: ''
 
 ---
