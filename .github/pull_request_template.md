@@ -6,7 +6,9 @@ https://docs.github.com/en/communities/using-templates-to-encourage-useful-issue
 # chore|docs|feat|fix|perf|refactor|style|test(scope): Enter_Short_Title_Here [Issue #XX]
 
 ## 📖 Description
+
 <!--[Add brief description and link to GitHub issue] -->
+
 [Issue #XX](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/issues/XX)
 
 ## 👀 Code Changes
