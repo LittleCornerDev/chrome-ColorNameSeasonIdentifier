@@ -28,7 +28,8 @@ jobs:
     #    # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - name: Checkout code
+      - id: checkout
+        name: Checkout code
         uses: actions/checkout@v3
         with:
           # token with workflow access is necessary in case commit steps need to update this
@@ -36,10 +37,11 @@ jobs:
           # the default ${{github.token}} (aka ${secrets.GITHUB_TOKEN}) cannot be granted workflow access.
           # for more info: https://github.com/orgs/community/discussions/35410
           token: ${{ secrets.WORKFLOW_TOKEN }}
-      - name: Read .nvmrc
+      - id: nvmrc
+        name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvm
-      - name: Use Node.js (.nvmrc)
+      - id: node
+        name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
@@ -49,22 +51,29 @@ jobs:
       #      with:
       #        node-version: ${{ matrix.node-version }}
       #        cache: 'npm'
-      - name: Install dependencies
+      - id: dependencies
+        name: Install dependencies
         run: npm ci
-      #- name: Build if needed
+      #- id: build
+      #  name: Build if needed
       #  run: npm run build --if-present
-      - name: Test code
+      - id: test
+        name: Test code
         run: npm test
-      - name: Lint code
+      - id: lint
+        name: Lint code
         run: npm run lint
-      - name: Commit lint fixes
+      - id: commit-lint
+        name: Commit lint fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix lint errors
           branch: ${{ github.head_ref }}
-      - name: Format code
+      - id: format
+        name: Format code
         run: npm run format
-      - name: Commit format fixes
+      - id: commit-format
+        name: Commit format fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix format errors
