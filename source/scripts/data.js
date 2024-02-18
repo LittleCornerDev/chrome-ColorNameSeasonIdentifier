@@ -8,7 +8,7 @@
  * found in the LICENSE file.
  */
 
-var CNSI = window.CNSI || {};
+var CNSI = globalThis.CNSI || {};
 
 CNSI.data = {
 

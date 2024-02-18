@@ -10,7 +10,7 @@
 
 
 
-var CNSI = window.CNSI || {};
+var CNSI = globalThis.CNSI || {};
 
 CNSI.content = {
 
