@@ -1,11 +1,16 @@
 # Dependency Modules
 node_modules/
 
-# Generated Build Fules
-build/
+# Env Variables
+.env
 
-# NYC Istanbul Code Coverage Output
-.nyc_output/
+# Generated Files
+build/
+dist/
+package/
+*.tgz
+
+# Code Coverage Output
 coverage/
 
 
