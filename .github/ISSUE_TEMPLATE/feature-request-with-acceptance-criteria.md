@@ -3,7 +3,8 @@ name: Feature Request with Acceptance Criteria
 about: Suggest a user-facing idea for this project
 title: "[feature]: enter_summary_here"
 labels: enhancement
-assignees: ""
+assignees: ''
+
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
@@ -12,7 +13,7 @@ assignees: ""
 
 ```
 As a {role}
-I need {function}
+I want {function}
 So that {benefit}
 ```
 
