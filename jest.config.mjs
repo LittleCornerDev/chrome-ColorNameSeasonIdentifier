@@ -21,7 +21,7 @@ const config = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: [ 'source/**/*.js' ],
+  collectCoverageFrom: ["source/**/*.js"],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -36,11 +36,7 @@ const config = {
   //coverageProvider: "babel",
 
   // A list of reporter names that Jest uses when writing coverage reports
-  coverageReporters: [
-    "html",
-    "json",
-    "text"
-  ],
+  coverageReporters: ["html", "json", "text"],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
@@ -133,9 +129,7 @@ const config = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: [
-    '<rootDir>/test/unit/helpers/mock-chrome.js',
-  ],
+  setupFiles: ["<rootDir>/test/unit/helpers/mock-chrome.js"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
