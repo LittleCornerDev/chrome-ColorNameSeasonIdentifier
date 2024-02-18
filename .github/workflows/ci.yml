@@ -31,7 +31,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-        token: ${{ github.token }}
+        # token with workflow access is necessary in case format step needs to update this 
+        # and any other workflow file.  
+        # the default ${{github.token}} (aka ${secrets.GITHUB_TOKEN}) cannot be granted workflow access.
+        # for more info: https://github.com/orgs/community/discussions/35410
+        token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: Read .nvmrc
       run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
       id: nvm
