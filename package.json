@@ -9,6 +9,7 @@
   },
   "type": "commonjs",
   "scripts": {
+    "build": "npm run zip",
     "format": "prettier . --write",
     "lint": "npm run lint-css && npm run lint-js",
     "lint-css": "stylelint 'source/**/*.css' --fix",
