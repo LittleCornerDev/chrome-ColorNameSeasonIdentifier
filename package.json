@@ -20,6 +20,11 @@
     "access": "restricted",
     "verbose": true
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run ci && npx commitlint --edit $1"
+    }
+  },
   "scripts": {
     "bump-version-major": "npm version major -m 'chore(vcs): Bump version to %s'",
     "bump-version-minor": "npm version minor -m 'chore(vcs): Bump version to %s'",
