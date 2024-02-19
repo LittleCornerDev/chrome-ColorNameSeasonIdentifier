@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Run CI script
+npm run ci
