@@ -1,3 +1,9 @@
 #!/bin/bash
-echo "Running commitlint"
+
+
+# Run commitlint on the commit message
+# https://www.techiediaries.com/git-hooks-husky-commitlint/
+echo "
+Running commitlint
+"
 npx commitlint --edit $1

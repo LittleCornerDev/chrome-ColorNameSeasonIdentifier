@@ -54,6 +54,8 @@ jobs:
       - id: dependencies
         name: Install dependencies
         run: npm ci
+        env:
+          IN_GHA: true
       #- id: build
       #  name: Build if needed
       #  run: npm run build --if-present
