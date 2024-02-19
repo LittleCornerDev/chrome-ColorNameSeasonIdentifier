@@ -1,2 +1,0 @@
-# @format
-npm run ci && npx commitlint --edit $1
