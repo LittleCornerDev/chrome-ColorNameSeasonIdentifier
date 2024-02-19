@@ -1,4 +1,5 @@
 #!/bin/bash
 
 # Run CI script
+echo "Running tests, linting, and formatting"
 npm run ci

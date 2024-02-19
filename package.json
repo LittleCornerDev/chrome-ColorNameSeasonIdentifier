@@ -34,7 +34,7 @@
     "lint-js": "eslint 'source/**/*.js' --fix && eslint 'test/**/*.js' --fix",
     "login": "npm login --registry=https://npm.pkg.github.com --scope=@littlecornerdev",
     "pack": "npm run dist && npm pack",
-    "postinstall": "cp hooks/* .git/hooks/ && chmod +x .git/hooks/* && echo 'hooks set up'",
+    "postinstall": "git config core.hooksPath ./hooks/ && echo 'hooks set up'",
     "publish-dist": "npm run dist && dotenv cws-publish %GOOGLE_CLIENT_ID% %GOOGLE_CLIENT_SECRET% %GOOGLE_REFRESH__TOKEN% ./$npm_package_config_zipfile %GOOGLE_EXTENSION_ID%",
     "publish-package": "npm run dist && npm publish",
     "test": "jest",
