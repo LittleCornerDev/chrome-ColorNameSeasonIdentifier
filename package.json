@@ -21,7 +21,11 @@
     "verbose": true
   },
   "scripts": {
-    "version": "echo $npm_package_version",
+    "bump-version-major": "npm version major -m 'chore(vcs): Bump version to %s'",
+    "bump-version-minor": "npm version minor -m 'chore(vcs): Bump version to %s'",
+    "bump-version-patch": "npm version patch -m 'chore(vcs): Bump version to %s'",
+    "ci": "npm run test && npm run lint && npm run format",
+    "cd": "npm run ci && npm run pack",
     "dist": "cd source/ && bestzip ../$npm_package_config_zipfile *",
     "format": "prettier . --write",
     "lint": "npm run lint-css && npm run lint-js",
@@ -32,7 +36,10 @@
     "publish-dist": "npm run dist && dotenv cws-publish %GOOGLE_CLIENT_ID% %GOOGLE_CLIENT_SECRET% %GOOGLE_REFRESH__TOKEN% ./$npm_package_config_zipfile %GOOGLE_EXTENSION_ID%",
     "publish-package": "npm run dist && npm publish",
     "test": "jest",
-    "upload-dist": "npm run dist && dotenv cws-upload %GOOGLE_CLIENT_ID% %GOOGLE_CLIENT_SECRET% %GOOGLE_REFRESH__TOKEN% ./$npm_package_config_zipfile %GOOGLE_EXTENSION_ID%"
+    "upload-dist": "npm run dist && dotenv cws-upload %GOOGLE_CLIENT_ID% %GOOGLE_CLIENT_SECRET% %GOOGLE_REFRESH__TOKEN% ./$npm_package_config_zipfile %GOOGLE_EXTENSION_ID%",
+    "preversion": "npm run cd",
+    "version": "npm run publish-package",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
