@@ -67,7 +67,7 @@ jobs:
         name: Commit lint fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix lint errors
+          commit_message: "refactor(*): Fix lint errors"
           branch: ${{ github.head_ref }}
       - id: format
         name: Format code
@@ -76,5 +76,5 @@ jobs:
         name: Commit format fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix format errors
+          commit_message: "refactor(*): Fix format errors"
           branch: ${{ github.head_ref }}
