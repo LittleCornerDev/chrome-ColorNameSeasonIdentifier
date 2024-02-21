@@ -51,8 +51,8 @@ jobs:
         if: startsWith(github.event.inputs.release-level, 'pre') != true
         name: Bump package version, create tag, and publish release
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_LEVEL)" >> $GITHUB_ENV
           npm run version:$RELEASE_LEVEL
+          echo "NEW_VERSION=$(npm run version:get)" >> $GITHUB_ENV
         env:
           # the default ${{ github.token }} (aka ${secrets.GITHUB_TOKEN} has packages access by default)
           GITHUB_PACKAGES_TOKEN: ${{ github.token }}
