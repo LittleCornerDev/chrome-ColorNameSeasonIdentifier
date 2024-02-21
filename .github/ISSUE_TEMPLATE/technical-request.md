@@ -1,9 +1,10 @@
 ---
-name: Technical Request with Acceptance Criteria
+name: Technical Request
 about: Suggest a non-user-facing idea for this project
 title: "[tech]: enter_summary_here"
 labels: tech
-assignees: ""
+assignees: ''
+
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
@@ -33,19 +34,3 @@ So that {benefit}
 <!-- [List any assumptions that could affect this feature.  E.g., data sources, environments.] -->
 
 -
-
-### Screenshots
-
-<!-- [List any screenshots that will help illustrate this feature request.] -->
-
--
-
-### [Acceptance Criteria](https://cucumber.io/docs/bdd/better-gherkin/)
-
-<!-- [Describe exact behavior that will fulfill this request.  Replace {placeholder} values.] -->
-
-```gherkin
-Given {some context}
-When {certain action is taken}
-Then {the outcome of action is observed}
-```

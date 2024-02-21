@@ -3,7 +3,8 @@ name: Documentation Request with Acceptance Criteria
 about: Suggest a documentation idea for this project
 title: "[doc]: enter_summary_here"
 labels: documentation
-assignees: ""
+assignees: ''
+
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
