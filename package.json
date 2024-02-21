@@ -1,6 +1,6 @@
 {
   "name": "@littlecornerdev/cnsi",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Chrome extension for identifying hex code, possible name, and possible wardrobe season for any pixel in the current tab page",
   "config": {
     "zipfile": "dist/cnsi.zip"
