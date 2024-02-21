@@ -6,11 +6,8 @@ node_modules/
 
 # Generated Files
 build/
-dist/
 package/
 *.tgz
 
 # Code Coverage Output
 coverage/
-
-
