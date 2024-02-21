@@ -53,6 +53,9 @@ jobs:
         run: |
           echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_LEVEL)" >> $GITHUB_ENV
           npm run version:$RELEASE_LEVEL
+        env:
+          # the default ${{ github.token }} (aka ${secrets.GITHUB_TOKEN} has packages access by default)
+          GITHUB_PACKAGES_TOKEN: ${{ github.token }}
 
       - id: get-changelog
         name: Get changelog details for new version
