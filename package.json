@@ -26,7 +26,7 @@
     "ci": "npm run test && npm run lint && npm run format",
     "//cd": "============================================================",
     "about:cd": "echo 'Continuous Delivery Scripts'",
-    "cd": "npm run ci && npm run pack",
+    "cd": "npm run ci && npm run package:verify",
     "//dist": "============================================================",
     "about:dist": "echo 'Distribution Scripts'",
     "dist": "cd source/ && bestzip ../$npm_package_config_zipfile *",
