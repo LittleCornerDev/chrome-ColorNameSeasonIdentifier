@@ -36,6 +36,10 @@ jobs:
       - id: dependencies
         name: Install dependencies
         run: npm ci
+        env:
+          # set $IN_GHA to true to prevent postinstall script from enabling the commit hooks
+          # that run test, lint, and format on precommit
+          IN_GHA: true
 
       #- id: git
       #  name: Configure git
