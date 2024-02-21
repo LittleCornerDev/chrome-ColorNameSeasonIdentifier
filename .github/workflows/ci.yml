@@ -20,7 +20,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      # set $IN_GHA to prevent executing steps that should only be run from Terminal
+      IN_GHA: true
     # Use a matrix to test across different versions of node
     #strategy:
     #  matrix:
@@ -54,10 +56,6 @@ jobs:
       - id: dependencies
         name: Install dependencies
         run: npm ci
-        env:
-          # set $IN_GHA to true to prevent postinstall script from enabling the commit hooks
-          # that run test, lint, and format on precommit
-          IN_GHA: true
       #- id: build
       #  name: Build if needed
       #  run: npm run build --if-present
