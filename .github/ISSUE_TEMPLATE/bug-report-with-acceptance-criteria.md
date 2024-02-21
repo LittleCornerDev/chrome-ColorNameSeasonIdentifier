@@ -2,9 +2,8 @@
 name: Bug Report with Acceptance Criteria
 about: Create a report to help us improve
 title: "[bug]: enter_summary_here"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 ### Bug Description / Current Behavior
