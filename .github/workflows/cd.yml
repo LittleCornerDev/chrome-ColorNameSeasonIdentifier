@@ -41,11 +41,11 @@ jobs:
           # that run test, lint, and format on precommit
           IN_GHA: true
 
-      #- id: git
-      #  name: Configure git
-      #  run: |
-      #    git config --global user.email 'cnsi.github-actions@valtech.com'
-      #    git config --global user.name 'CNSI GitHub Actions'
+      - id: git
+        name: Configure git
+        run: |
+          git config user.email 'github-actions@@users.noreply.github.com'
+          git config user.name 'GitHub Actions'
 
       - id: bump
         if: startsWith(github.event.inputs.release-level, 'pre') != true
