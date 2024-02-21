@@ -4,25 +4,30 @@ and this project adheres to [Semantic
 Versioning](https://semver.org/spec/v2.0.0.html).
 
 {{#each releases}}
-  {{!-- if tag, it should be an actual release with an isoDate --}}
+  {{! if tag, it should be an actual release with an isoDate }}
   {{#if tag}}
     {{#if href}}
-## [{{title}}]({{href}}) - {{isoDate}}
+      ## [{{title}}]({{href}}) -
+      {{isoDate}}
     {{else}}
-## {{title}} - {{isoDate}}
+      ##
+      {{title}}
+      -
+      {{isoDate}}
     {{/if}}
-  {{!-- if no tag, it should be unreleased --}}
-  {{!-- do not use title b/c it is same as last release and could be confusing --}}
+    {{! if no tag, it should be unreleased }}
+    {{! do not use title b/c it is same as last release and could be confusing }}
   {{else}}
     {{#if href}}
-## [Unreleased]({{href}})
+      ## [Unreleased]({{href}})
     {{else}}
-## Unreleased
+      ## Unreleased
     {{/if}}
   {{/if}}
 
   {{#if summary}}
-Summary: {{summary}}
+    Summary:
+    {{summary}}
   {{/if}}
 
   {{#if merges}}
