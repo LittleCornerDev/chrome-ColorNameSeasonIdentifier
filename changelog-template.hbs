@@ -16,9 +16,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
   {{/if}}
 
   {{#if merges}}
-  {{#each merges}}
-  - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} {{#if href}}[`#{{id}}`]({{href}}){{/if}}
-  {{/each}}
+    {{#each merges}}
+      -
+      {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}}
+      {{#if href}}[`#{{id}}`]({{href}}){{/if}}
+    {{/each}}
   {{/if}}
 
 {{/each}}
