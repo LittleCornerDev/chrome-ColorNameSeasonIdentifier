@@ -55,10 +55,10 @@
     "about:version": "echo 'Versioning Scripts'",
     "preversion": "npm run cd",
     "version:get": "echo `Package version is now $npm_package_version`",
-    "version:major": "npm version --no-commit-hooks major -m 'build(vcs): Bump version to %s'",
-    "version:minor": "npm version --no-commit-hooks minor -m 'build(vcs): Bump version to %s'",
-    "version:patch": "npm version --no-commit-hooks patch -m 'build(vcs): Bump version to %s'",
-    "version": "npm run version:get && node scripts/update-manifest-version.js && git add source/manifest.json && npx auto-changelog -l 100 -p -t changelog-template.hbs && git add CHANGELOG.md",
+    "version:major": "npm version --no-commit-hooks --git-tag-version false major",
+    "version:minor": "npm version --no-commit-hooks --git-tag-version false minor",
+    "version:patch": "npm version --no-commit-hooks --git-tag-version false patch",
+    "version": "npm run version:get && node scripts/update-manifest-version.js  && npx auto-changelog -l 100 -p -t changelog-template.hbs && git commit -am `build(vcs): Bump version to $npm_package_version` && git tag -v $npm_package_version",
     "postversion": "git push && git push --tags && npm run package:publish"
   },
   "repository": {
