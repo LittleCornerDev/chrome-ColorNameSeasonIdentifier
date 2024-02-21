@@ -54,7 +54,7 @@
     "//version": "============================================================",
     "about:version": "echo 'Versioning Scripts'",
     "preversion": "npm run cd",
-    "version:get": "echo `Package version is now $npm_package_version`",
+    "version:get": "echo \"Package version is now $npm_package_version\"",
     "version:major": "npm version --no-commit-hooks --git-tag-version false major",
     "version:minor": "npm version --no-commit-hooks --git-tag-version false minor",
     "version:patch": "npm version --no-commit-hooks --git-tag-version false patch",
