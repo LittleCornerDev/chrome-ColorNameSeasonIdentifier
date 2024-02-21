@@ -65,7 +65,7 @@
     "version:minor": "npm version --no-commit-hooks minor -m 'build(vcs): Bump version to %s'",
     "version:patch": "npm version --no-commit-hooks patch -m 'build(vcs): Bump version to %s'",
     "version": "npm run version:get && node scripts/update-manifest-version.js && git add source/manifest.json",
-    "//postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
