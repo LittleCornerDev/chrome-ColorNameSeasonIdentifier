@@ -47,7 +47,7 @@
     "about:package": "echo 'Packaging Scripts'",
     "package:login": "npm login --registry=https://npm.pkg.github.com --scope=@littlecornerdev",
     "package:verify": "npm run dist && npm pack",
-    "package:publish": "npm run dist && npm run package:login && npm publish --verbose --tag `v$npm_package_version`",
+    "package:publish": "npm run dist && npm run package:login && npm publish --verbose --tag $npm_package_version",
     "//test": "============================================================",
     "about:test": "echo: 'Code Testing Scripts'",
     "test": "jest",
