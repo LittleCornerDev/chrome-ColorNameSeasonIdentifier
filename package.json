@@ -51,21 +51,15 @@
     "//test": "============================================================",
     "about:test": "echo: 'Code Testing Scripts'",
     "test": "jest",
-    "//release": "============================================================",
-    "about:release": "echo 'Release Scripts'",
-    "prerelease": "npm run cd",
-    "release:major": "npm run version:major",
-    "release:minor": "npm run version:minor",
-    "release:patch": "npm run version:minor",
-    "postrelease": "npm run package:publish",
     "//version": "============================================================",
     "about:version": "echo 'Versioning Scripts'",
+    "preversion": "npm run cd",
     "version:get": "echo `Package version is now $npm_package_version`",
     "version:major": "npm version --no-commit-hooks major -m 'build(vcs): Bump version to %s'",
     "version:minor": "npm version --no-commit-hooks minor -m 'build(vcs): Bump version to %s'",
     "version:patch": "npm version --no-commit-hooks patch -m 'build(vcs): Bump version to %s'",
     "version": "npm run version:get && node scripts/update-manifest-version.js && git add source/manifest.json && npx auto-changelog -l 100 -p -t changelog-template.hbs && git add CHANGELOG.md",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm run package:publish"
   },
   "repository": {
     "type": "git",
