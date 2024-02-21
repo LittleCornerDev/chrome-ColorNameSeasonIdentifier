@@ -15,10 +15,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
     Summary:{{summary}}
   {{/if}}
 
-  {{#commit-list commits heading="### Commits"}}
-    -
-    {{#if breaking}}**BREAKING CHANGE:** {{/if}}{{subject}}
-    {{#if href}}[`{{shorthash}}`]({{href}}){{/if}}
-  {{/commit-list}}
+  {{#if merges}}
+  {{#each merges}}
+  - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} {{#if href}}[`#{{id}}`]({{href}}){{/if}}
+  {{/each}}
+  {{/if}}
 
 {{/each}}
