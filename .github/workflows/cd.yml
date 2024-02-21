@@ -56,22 +56,6 @@ jobs:
           # the default ${{ github.token }} (aka ${secrets.GITHUB_TOKEN} has packages access by default)
           GITHUB_PACKAGES_TOKEN: ${{ github.token }}
 
-      - id: get-changelog
-        name: Get changelog details for new version
-        uses: superfaceai/release-changelog-action@v2
-        with:
-          path-to-changelog: CHANGELOG.md
-          version: ${{ env.NEW_VERSION }}
-          operation: read
-
-      - id: release
-        name: Update GitHub release documentation with changelog details
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.NEW_VERSION }}
-          body: ${{ steps.get-changelog.outputs.changelog }}
-          prerelease: ${{ startsWith(github.event.inputs.release-level, 'pre') }}
-
       #- id: upload
       #  name: Upload to Chrome Web Store
       #  run: npm run upload --if-present
