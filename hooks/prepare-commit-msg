@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Redirect git commit to git cz
-# https://stackoverflow.com/questions/51869097/commitizen-is-there-a-way-to-override-standard-git-commit
-echo "
-Running commitizen
-"
-exec < /dev/tty && node_modules/.bin/git-cz --hook || true

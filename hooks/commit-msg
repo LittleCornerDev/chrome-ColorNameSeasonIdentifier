@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Run git cz
+# https://stackoverflow.com/questions/51869097/commitizen-is-there-a-way-to-override-standard-git-commit
+# Using commit-msg instead of prepare-commit-msg so that we can use git commit --no-verify/-n flag to skip this
+echo "
+Running commitizen
+"
+exec < /dev/tty && node_modules/.bin/git-cz --hook || true
 
 # Run commitlint on the commit message
 # https://www.techiediaries.com/git-hooks-husky-commitlint/
