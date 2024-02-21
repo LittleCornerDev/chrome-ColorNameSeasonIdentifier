@@ -45,7 +45,7 @@
     "lint": "npm run lint:css && npm run lint:js",
     "//publish": "============================================================",
     "about:package": "echo 'Packaging Scripts'",
-    "package:login": "if \"$IN_GHA\" ; then echo 'in GHA'; else echo 'not in GHA' && npm login --registry=https://npm.pkg.github.com --scope=@littlecornerdev; fi",
+    "package:login": "if \"$IN_GHA\" ; then echo 'in GHA'; else echo 'not in GHA' && npm login --scope=@littlecornerdev --registry=https://npm.pkg.github.com ; fi",
     "package:verify": "npm run dist && npm pack",
     "package:publish": "npm run dist && npm run package:login && npm publish --verbose --tag latest",
     "//test": "============================================================",
