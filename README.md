@@ -13,21 +13,30 @@ PLEASE NOTE: The digital color detected is subject to your computer's as well as
 
 ## FEATURES
 
-- Click extension icon to open/close color detection information.
-- Mouseover any pixel on the current tab to see detected color, closest name, and closest season.
-- Changing tab url, scrolling, and clicking anywhere on current tab will reload image data.
+-   Click extension icon to open/close color detection information.
+-   Mouseover any pixel on the current tab to see detected color, closest name, and closest season.
+-   Changing tab url, scrolling, and clicking anywhere on current tab will reload image data.
 
 ## COLOR DATA SOURCES
 
-- https://en.wikipedia.org/wiki/X11_color_names
-- https://www.w3schools.com/colors/colors_names.asp
-- https://www.w3schools.com/colors/colors_crayola.asp
-- https://www.w3schools.com/colors/colors_ral.asp
-- https://en.wikipedia.org/wiki/Pantone
-- https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/which-colour-season-are-you
+-   https://en.wikipedia.org/wiki/X11_color_names
+-   https://www.w3schools.com/colors/colors_names.asp
+-   https://www.w3schools.com/colors/colors_crayola.asp
+-   https://www.w3schools.com/colors/colors_ral.asp
+-   https://en.wikipedia.org/wiki/Pantone
+-   https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/which-colour-season-are-you
+
+## HOW TO INSTALL
+
+[Chrome Web Store](https://chromewebstore.google.com/detail/color-name-season-identif/pddbkjjdhnmhmdeoaodeggedmebdhcgp)
+[From Unzipped File](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+
+## CHANGES
+
+[CHANGELOG.md](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/blob/master/CHANGELOG.md)
 
 ## CONTRIBUTORS
 
 ![GitHub Contributors Image](https://contrib.rocks/image?repo=LittleCornerDev/chrome-ColorNameSeasonIdentifier)
 
-[CONTRIBUTING GUIDE](./github/CONTRIBUTING.md)
+[CONTRIBUTING GUIDE](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/blob/master/.github/CONTRIBUTING.md)
