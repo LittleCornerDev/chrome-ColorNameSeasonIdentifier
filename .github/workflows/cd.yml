@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       release-level:
-        description: 'Release level (one of): pre, patch, minor, major'
+        description: "Release level (one of): pre, patch, minor, major"
         required: true
 
 jobs:
