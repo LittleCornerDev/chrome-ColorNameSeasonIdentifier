@@ -64,7 +64,7 @@
     "version:minor": "npm version minor -m 'build(vcs): Bump version to %s'",
     "version:patch": "npm version patch -m 'build(vcs): Bump version to %s'",
     "version": "node scripts/update-manifest-version.js",
-    "postversion": "git push && git push --tags"
+    "//postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
