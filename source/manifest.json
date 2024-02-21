@@ -2,11 +2,16 @@
   "manifest_version": 2,
   "name": "Color Name Season Identifier",
   "description": "Identifies hex code, possible name, and possible wardrobe season for any pixel in the current tab page.",
-  "version": "0.1.2",
-  "permissions": ["activeTab", "storage"],
+  "version": "0.1.3",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
   "background": {
     "persistent": false,
-    "scripts": ["scripts/background.js"]
+    "scripts": [
+      "scripts/background.js"
+    ]
   },
   "browser_action": {
     "default_icon": "icons/32.png",
