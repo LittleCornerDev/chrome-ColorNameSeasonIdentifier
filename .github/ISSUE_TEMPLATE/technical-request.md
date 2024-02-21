@@ -3,7 +3,8 @@ name: Technical Request
 about: Suggest a non-user-facing idea for this project
 title: "[tech]: enter_summary_here"
 labels: tech
-assignees: ""
+assignees: ''
+
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
