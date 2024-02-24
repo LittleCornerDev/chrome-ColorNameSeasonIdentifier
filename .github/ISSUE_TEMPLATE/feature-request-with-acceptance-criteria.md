@@ -3,8 +3,7 @@ name: Feature Request with Acceptance Criteria
 about: Suggest a user-facing idea for this project
 title: "[feature]: enter_summary_here"
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
@@ -28,7 +27,6 @@ So that {benefit}
 <!-- [List any unknown information that may need investigation to complete this feature.] -->
 
 -
-
 
 ### Design Images
 
