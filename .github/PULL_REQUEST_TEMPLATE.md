@@ -79,7 +79,7 @@ https://docs.github.com/en/communities/using-templates-to-encourage-useful-issue
 1.  [Checkout branch](https://www.atlassian.com/git/tutorials/using-branches/git-checkout).
 2.  In Terminal, create the distribution zip: `npm run dist`.
 3.  Unzip the file in dist/cnsi.zip.
-4.  [Install the local extension in your browser](https://superuser.com/questions/247651/how-does-one-install-an-extension-for-chrome-browser-from-the-local-file-system).
+4.  [Install the local extension in your browser](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked).
 
 ---
 
