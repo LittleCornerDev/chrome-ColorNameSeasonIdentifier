@@ -15,7 +15,7 @@ PLEASE NOTE: The digital color detected is subject to your computer's as well as
 
 - [From Chrome Web Store](https://chromewebstore.google.com/detail/color-name-season-identif/pddbkjjdhnmhmdeoaodeggedmebdhcgp)
 - [From Unzipped File](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
-  
+
 ## FEATURES
 
 - Click extension icon to open/close color detection information.
@@ -30,8 +30,6 @@ PLEASE NOTE: The digital color detected is subject to your computer's as well as
 - https://www.w3schools.com/colors/colors_ral.asp
 - https://en.wikipedia.org/wiki/Pantone
 - https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/which-colour-season-are-you
-
-
 
 ## CHANGES
 
