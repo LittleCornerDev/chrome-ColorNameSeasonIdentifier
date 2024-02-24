@@ -7,12 +7,17 @@ let listenersOnRemoved = [];
 let listenersOnUpdated = [];
 
 globalThis.chrome = {
-  browserAction: {
+  action: {
     onClicked: {
       addListener: async (handler) => {
-        console.log("chrome.browserAction.onClicked.addListener");
+        console.log("chrome.action.onClicked.addListener");
         handler(tab);
       },
+    },
+  },
+  scripting: {
+    executeScript: async () => {
+      console.log("chrome.scripting.executeScript");
     },
   },
   storage: {
@@ -62,9 +67,6 @@ globalThis.chrome = {
       if (listenersOnRemoved.length > 0) {
         listenersOnRemoved[0](tabId, {});
       }
-    },
-    executeScript: async () => {
-      console.log("chrome.tabs.executeScript");
     },
     get: async () => {
       console.log("chrome.tabs.get");

@@ -13,11 +13,10 @@ var CNSI = globalThis.CNSI || {};
 CNSI.content = {
   // Tasks we need to do onload
   init: function () {
-    console.log("initializing content");
-    //CNSI.content.connectToExtension();
-    CNSI.content.getTabId();
-    CNSI.content.addListeners();
-    CNSI.content.createIds();
+    console.log("Initializing content");
+
+    //chrome.runtime.onConnect.addListener(CNSI.content.getTabId);
+    CNSI.content.connectToExtension();
   },
 
   shutdown: function () {
@@ -26,21 +25,36 @@ CNSI.content = {
 
   tabId: null,
 
-  getTabId: function () {
+  /*
+  doesn't always work
+  maxRetries: 5,
+  getTabId: async function (port) {
     console.log("Getting tab id...");
-    //chrome.runtime.onConnect.addListener(port => {
-    //port.sendMessage({scrolled: true}, function(response) {
-    chrome.runtime.sendMessage({ getTabId: true }, function (response) {
-      if (response == null) {
-        console.log("Failed to get tab id.  Trying again.");
-        setTimeout(CNSI.content.getTabId, 1000 * 1);
-      } else if (response.status == "success") {
+    let response;
+    try {
+      //response = await port.sendMessage({ getTabId: true });
+      response = await chrome?.runtime?.sendMessage({ getTabId: true });
+      console.log("Sending getTabId message: " + response.status);
+
+      if (response?.status == "success") {
         console.log("My tab id: " + response.tabId);
         CNSI.content.tabId = response.tabId;
+
+      } else {
+        console.log("Failed to get tab id: " + response);
       }
-    });
-    //});
-  },
+    } catch (error) {
+      if (!response && CNSI.content.maxRetries > 0) {
+        console.log("Failed to get tab id.  Trying again.");
+        CNSI.content.maxRetries--;
+        setTimeout(CNSI.content.getTabId, 1000 * CNSI.content.maxRetries);
+
+      } else {
+        console.error("Failed to get tab id: " + response);
+      }
+    }
+
+  },*/
 
   // Adds element ids to `id` object for every key in `ids` array
   createIds: function () {
@@ -56,6 +70,7 @@ CNSI.content = {
     // Wrap runtime listeners with onConnect
     // https://stackoverflow.com/questions/54181734/chrome-extension-message-passing-unchecked-runtime-lasterror-could-not-establi/54686484#54686484
     // https://www.bennettnotes.com/post/fix-receiving-end-does-not-exist/
+
     //chrome.runtime.onConnect.addListener(port => {
     //console.log("content script connected on port " + port);
 
@@ -63,7 +78,7 @@ CNSI.content = {
     // These include the screenshot and identifier open/close
     // https://developer.chrome.com/extensions/messaging
     chrome.runtime.onMessage.addListener(CNSI.content.handleMessages);
-    //port.onMessage.addListener(CNSI.content.handleMessages);
+    //CNSI.content.port.onMessage.addListener(CNSI.content.handleMessages);
 
     document.body.addEventListener("mousemove", CNSI.content.handleMouseMove);
 
@@ -77,7 +92,7 @@ CNSI.content = {
   },
 
   removeListeners: function () {
-    chrome.runtime.onMessage.removeListener(CNSI.content.handleMessages);
+    chrome?.runtime?.onMessage?.removeListener(CNSI.content.handleMessages);
 
     document.body.removeEventListener(
       "mousemove",
@@ -93,14 +108,15 @@ CNSI.content = {
 
   handleMessages: function (request, sender, sendResponse) {
     /*console.log(sender.tab ?
-					"from a content script:" + sender.tab.url :
-					"from the background script");*/
+          "from a content script:" + sender.tab.url :
+          "from the background script");*/
 
     if (request.screenshot != null) {
       //console.log("Received screenshot " + request.screenshot);
       console.log("Received new screenshot");
       CNSI.content.screenshotUrl = request.screenshot;
       CNSI.content.tabId = request.tabId;
+      console.log("tabId: " + CNSI.content.tabId);
       CNSI.content.setImage();
       sendResponse({ status: "success" });
     } else if (request.identifier != null) {
@@ -108,7 +124,7 @@ CNSI.content = {
       if (request.identifier == "open") {
         CNSI.content.openIdentifier();
       } else if (request.identifier == "close") {
-        CNSI.content.shutdown();
+        //CNSI.content.shutdown(); will remove listeners and prevent the extension from re-opening again!
         CNSI.content.closeIdentifier();
       }
       sendResponse({ status: "success" });
@@ -125,8 +141,8 @@ CNSI.content = {
     var y = event.clientY; // + window.scrollY; //document.body.scrollTop;
 
     /*console.log("clientX: " + event.clientX + ", window.scrollX: " + window.scrollX + ", document.body.scrollLeft: " + document.body.scrollLeft);
-		console.log("clientY: " + event.clientY + ", window.scrollY: " + window.scrollY + ", document.body.scrollTop: " + document.body.scrollTop);
-		*/
+    console.log("clientY: " + event.clientY + ", window.scrollY: " + window.scrollY + ", document.body.scrollTop: " + document.body.scrollTop);
+    */
     //console.log("x: " + x + ", y: " + y);
     //moveMain(x, y);
 
@@ -136,40 +152,37 @@ CNSI.content = {
     }
   },
 
-  handleClick: function (event) {
+  handleClick: async function (event) {
     // Send message to background.js so it can send us new screenshot
     // https://developer.chrome.com/extensions/messaging
 
-    //chrome.runtime.onConnect.addListener(port => {
-    chrome.runtime.sendMessage({ clicked: true }, function (response) {
-      //port.sendMessage({scrolled: true}, function(response) {
-      console.log("sending click message: " + response.status);
+    chrome.runtime.onConnect.addListener(async (port) => {
+      //const response = await port.sendMessage({ clicked: true });
+      const response = await chrome?.runtime?.sendMessage({ clicked: true });
+      console.log("Sending click message: " + response.status);
     });
-    //});
   },
 
-  handleResize: function (event) {
+  handleResize: async function (event) {
     // Send message to background.js so it can send us new screenshot
     // https://developer.chrome.com/extensions/messaging
 
-    //chrome.runtime.onConnect.addListener(port => {
-    chrome.runtime.sendMessage({ resized: true }, function (response) {
-      //port.sendMessage({resized: true}, function(response) {
-      console.log("sending resize message: " + response.status);
+    chrome.runtime.onConnect.addListener(async (port) => {
+      //const response = await port.sendMessage({ resized: true });
+      const response = await chrome?.runtime?.sendMessage({ resized: true });
+      console.log("Sending resize message: " + response.status);
     });
-    //});
   },
 
-  handleScroll: function (event) {
+  handleScroll: async function (event) {
     // Send message to background.js so it can send us new screenshot
     // https://developer.chrome.com/extensions/messaging
 
-    //chrome.runtime.onConnect.addListener(port => {
-    chrome.runtime.sendMessage({ scrolled: true }, function (response) {
-      //port.sendMessage({scrolled: true}, function(response) {
-      console.log("sending scroll message: " + response.status);
+    chrome.runtime.onConnect.addListener(async (port) => {
+      //const response = await port.sendMessage({ scrolled: true });
+      const response = await chrome?.runtime?.sendMessage({ scrolled: true });
+      console.log("Sending scroll message: " + response.status);
     });
-    //});
   },
 
   // List of all element ids, keyed by type, for easy lookup.
@@ -221,12 +234,14 @@ CNSI.content = {
 
   // Attempt to reconnect
   reconnectToExtension: function () {
-    console.log("Attempting to reconnect");
+    if (CNSI.content.port != null) {
+      console.log("Attempting to reconnect");
 
-    // Reset port
-    CNSI.content.port = null;
-    // Attempt to reconnect after 1 second
-    setTimeout(CNSI.content.connectToExtension, 1000 * 1);
+      // Reset port
+      CNSI.content.port = null;
+      // Attempt to reconnect after 1 second
+      setTimeout(CNSI.content.connectToExtension, 1000 * 1);
+    }
   },
 
   // Attempt to connect
@@ -234,53 +249,56 @@ CNSI.content = {
     console.log("Attempting to connect");
 
     // Make the connection
-    //CNSI.content.port = chrome.runtime.connect({name: "my-port"});
-    CNSI.content.port = chrome.runtime.connect();
+    try {
+      CNSI.content.port = chrome?.runtime?.connect({
+        name: "cnsi-content-port",
+      });
+    } catch (error) {
+      console.error(error);
+    }
     if (CNSI.content.port != null) {
+      console.log("Connected");
+      //CNSI.content.getTabId();
       CNSI.content.addListeners();
       CNSI.content.createIds();
+
+      // When extension is upgraded or disabled and renabled, the content scripts
+      // will still be injected, so we have to reconnect them.
+      // We listen for an onDisconnect event, and then wait for a second before
+      // trying to connect again. Because chrome.runtime.connect fires an onDisconnect
+      // event if it does not connect, an unsuccessful connection should trigger
+      // another attempt, 1 second later.
+      try {
+        CNSI.content.port.onDisconnect.addListener(
+          CNSI.content.reconnectToExtension,
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
-
-    /*chrome.runtime.onConnect.addListener((port) => {
-			port.onMessage.addListener((msg) => {
-					if (msg.function == 'html') {
-					port.postMessage({ html: document.documentElement.outerHTML, description: document.querySelector("meta[name=\'description\']").getAttribute('content'), title: document.title });
-				}
-			});
-		});*/
-
-    // When extension is upgraded or disabled and renabled, the content scripts
-    // will still be injected, so we have to reconnect them.
-    // We listen for an onDisconnect event, and then wait for a second before
-    // trying to connect again. Because chrome.runtime.connect fires an onDisconnect
-    // event if it does not connect, an unsuccessful connection should trigger
-    // another attempt, 1 second later.
-    CNSI.content.port.onDisconnect.addListener(
-      CNSI.content.reconnectToExtension,
-    );
   },
 
   /*insertCSS: function() {
-		// https://stackoverflow.com/questions/9721344/my-css-is-not-getting-injected-through-my-content-script
-		var style = document.createElement("link");
-		style.id = id.style;
-		style.rel = "stylesheet";
-		style.type = "text/css";
-		style.href = chrome.extension.getURL("content.css");
-		(document.head||document.documentElement).appendChild(style);
-	}
+    // https://stackoverflow.com/questions/9721344/my-css-is-not-getting-injected-through-my-content-script
+    var style = document.createElement("link");
+    style.id = id.style;
+    style.rel = "stylesheet";
+    style.type = "text/css";
+    style.href = chrome?.runtime?.getURL("content.css");
+    (document.head||document.documentElement).appendChild(style);
+  }
 
-	moveMain: function(x, y) {
-		if (x != null && y != null) {
-			//console.log("x: " + x + ", y: " + y);
-			var main = document.getElementById(CNSI.content.id.main);
-			main.style.top = y;
-			main.style.left = x;
-		}
-	}
+  moveMain: function(x, y) {
+    if (x != null && y != null) {
+      //console.log("x: " + x + ", y: " + y);
+      var main = document.getElementById(CNSI.content.id.main);
+      main.style.top = y;
+      main.style.left = x;
+    }
+  }
 
 
-	*/
+  */
 
   getHTML: function () {
     return `<!-- BEGIN: Origin -->
@@ -505,17 +523,20 @@ CNSI.content = {
   getCanvasContext: function (canvas) {
     //https://stackoverflow.com/questions/43582546/what-is-colorspace-in-imagedata
     //https://github.com/WICG/canvas-color-space/blob/master/CanvasColorSpaceProposal.md
-    var canvasContext = canvas.getContext("2d", { alpha: false });
-    //var canvasContext = canvas.getContext('2d', { colorSpace: "srgb", pixelFormat: "8-8-8-8"}); //default
-    //var canvasContext = canvas.getContext('2d', { colorSpace: "linear-srgb", pixelFormat: "float16"});
-    //var canvasContext = canvas.getContext('2d', { colorSpace: "legacy-srgb"});
+    var canvasContext = canvas.getContext("2d", {
+      alpha: false,
+      willReadFrequently: true,
+    });
+    //var canvasContext = canvas.getContext('2d', { colorSpace: "srgb", pixelFormat: "8-8-8-8", willReadFrequently: true }); //default
+    //var canvasContext = canvas.getContext('2d', { colorSpace: "linear-srgb", pixelFormat: "float16", willReadFrequently: true });
+    //var canvasContext = canvas.getContext('2d', { colorSpace: "legacy-srgb", willReadFrequently: true });
     //var canvasContext = canvas.getContext("webgl2");
     return canvasContext;
   },
 
   // Sets the screenshotUrl to an invisible image element
   setImage: function () {
-    //chrome.storage.local.get(["CNSIdata"], function(data) {
+    //const data = await chrome?.storage?.local?.get(["CNSIdata"]);
     //var screenshotInStorage = data.CNSIdata[CNSI.content.tabId].screenshot;
     //var screenshotUrl = CNSI.content.screenshotUrl || screenshotInStorage;
     var screenshotUrl = CNSI.content.screenshotUrl;
@@ -526,13 +547,11 @@ CNSI.content = {
       var img = main.querySelector("img");
       img.src = screenshotUrl;
     }
-
-    //});
   },
 
   // Sets the canvas to the pixel in the screenshot image at the given (x,y) coordinates
   setImageCanvas: function (x, y) {
-    //chrome.storage.local.get(["CNSIdata"], function(data) {
+    //const data = await chrome?.storage?.local?.get(["CNSIdata"]);
     //var screenshotInStorage = data.CNSIdata[CNSI.content.tabId].screenshot;
     //var screenshotUrl = CNSI.content.screenshotUrl || screenshotInStorage;
     var screenshotUrl = CNSI.content.screenshotUrl;
@@ -550,8 +569,8 @@ CNSI.content = {
       var coordsToImgRatioX = img.width / window.innerWidth; //document.body.clientWidth if full screenshot
       var coordsToImgRatioY = img.height / window.innerHeight; //document.body.clientHeight
       /*console.log("img.width: " + img.width + ", window.innerWidth: " + window.innerWidth + ", document.body.clientWidth: " + document.body.clientWidth);
-			console.log("img.height: " + img.height + ", window.innerHeight: " + window.innerHeight + ", w   .clientHeight: " + document.body.clientHeight);
-			console.log("coordsToImgRatioX: " + coordsToImgRatioX + ", coordsToImgRatioY: " + coordsToImgRatioY);*/
+      console.log("img.height: " + img.height + ", window.innerHeight: " + window.innerHeight + ", w   .clientHeight: " + document.body.clientHeight);
+      console.log("coordsToImgRatioX: " + coordsToImgRatioX + ", coordsToImgRatioY: " + coordsToImgRatioY);*/
 
       var canvasContext = CNSI.content.getCanvasContext(canvas);
 
@@ -579,14 +598,14 @@ CNSI.content = {
         canvasLayoutHeight,
       );
       /*let gl = canvas.getContext("webgl2");
-			canvasContext.activeTexture(canvasContext.TEXTURE0);
-			let texture = canvasContext.createTexture();
-			canvasContext.bindTexture(canvasContext.TEXTURE_2D, texture);
-			const framebuffer = canvasContext.createFramebuffer();
-			canvasContext.bindFramebuffer(canvasContext.FRAMEBUFFER, framebuffer);
-			canvasContext.framebufferTexture2D(canvasContext.FRAMEBUFFER, canvasContext.COLOR_ATTACHMENT0, canvasContext.TEXTURE_2D, texture, 0);
-			canvasContext.texImage2D(canvasContext.TEXTURE_2D, 0, canvasContext.RGBA, canvasContext.RGBA, canvasContext.UNSIGNED_BYTE, img);
-			canvasContext.drawBuffers([canvasContext.COLOR_ATTACHMENT0]);*/
+      canvasContext.activeTexture(canvasContext.TEXTURE0);
+      let texture = canvasContext.createTexture();
+      canvasContext.bindTexture(canvasContext.TEXTURE_2D, texture);
+      const framebuffer = canvasContext.createFramebuffer();
+      canvasContext.bindFramebuffer(canvasContext.FRAMEBUFFER, framebuffer);
+      canvasContext.framebufferTexture2D(canvasContext.FRAMEBUFFER, canvasContext.COLOR_ATTACHMENT0, canvasContext.TEXTURE_2D, texture, 0);
+      canvasContext.texImage2D(canvasContext.TEXTURE_2D, 0, canvasContext.RGBA, canvasContext.RGBA, canvasContext.UNSIGNED_BYTE, img);
+      canvasContext.drawBuffers([canvasContext.COLOR_ATTACHMENT0]);*/
 
       //};
       //img.src = screenshotUrl;
@@ -595,15 +614,13 @@ CNSI.content = {
       //console.log("x: " + x + ", y: " + y);
       //console.log("screenshotUrl:"  + screenshotUrl);
     }
-
-    //});
   },
 
   // Sets/displays the hex and rgb color data for the pixel displayed in the canvas.
   // Modified from
   // https://stackoverflow.com/questions/58668131/how-to-get-the-rgb-data-from-an-area-of-image-with-javascript
   setImageData: function () {
-    var origin = document.getElementById(CNSI.content.id.origin);
+    var origin = document.getElementById(CNSI.content.id["origin"]);
 
     var canvas = origin.querySelector("canvas"); //https://github.com/WICG/canvas-color-space/blob/master/CanvasColorSpaceProposal.md
     var canvasLayoutWidth = canvas.width;
@@ -637,7 +654,7 @@ CNSI.content = {
       1,
     ).data;
     /*var data = new Uint8Array(canvasLayoutWidth * canvasLayoutHeight * 4);
-		canvasContext.readPixels(canvasLayoutWidth/2, canvasLayoutHeight/2, 1, 1, canvasContext.RGBA, canvasContext.UNSIGNED_BYTE, data);*/
+    canvasContext.readPixels(canvasLayoutWidth/2, canvasLayoutHeight/2, 1, 1, canvasContext.RGBA, canvasContext.UNSIGNED_BYTE, data);*/
 
     const average = { r: 0, g: 0, b: 0, a: 0 }; // Creates an object to count all the values up
     const pixels = data.length / 4; // The actual amount of pixels read
@@ -686,28 +703,28 @@ CNSI.content = {
     //Display the HCL
     //const hclKeys = [ "h", "c", "l"];
     /*var hcl = CNSI.utils.RGBtoHCL(average.r, average.g, average.b);
-		hclKeys.forEach(function(component, componentIndex) {
-			var componentValue = hcl[component];
+    hclKeys.forEach(function(component, componentIndex) {
+      var componentValue = hcl[component];
 
-			var span = document.getElementById(CNSI.content.id["originHcl"+component.toUpperCase()]).querySelector("span");
-			span.innerHTML = componentValue;
-		});*/
+      var span = document.getElementById(CNSI.content.id["originHcl"+component.toUpperCase()]).querySelector("span");
+      span.innerHTML = componentValue;
+    });*/
 
     //Display the HSL
     //const hslKeys = [ "h", "s", "l"];
     //var hsl = CNSI.utils.hexToHSL(hexCode);
     /*var otherHsl = ntc.hsl(hexCode);
-		console.log("ntc HSL is h " + otherHsl[0] + " s " + otherHsl[1] + " l " + otherHsl[2]);*/
+    console.log("ntc HSL is h " + otherHsl[0] + " s " + otherHsl[1] + " l " + otherHsl[2]);*/
     /*hslKeys.forEach(function(component, componentIndex) {
-			var componentValue = hsl[component];
+      var componentValue = hsl[component];
 
-			var span = document.getElementById(CNSI.content.id["originHsl"+component.toUpperCase()]).querySelector("span");
-			if (component == "h") {
-				span.innerHTML = componentValue;
-			} else {
-				span.innerHTML = componentValue + "%";
-			}
-		});*/
+      var span = document.getElementById(CNSI.content.id["originHsl"+component.toUpperCase()]).querySelector("span");
+      if (component == "h") {
+        span.innerHTML = componentValue;
+      } else {
+        span.innerHTML = componentValue + "%";
+      }
+    });*/
 
     //Display the HSV
     const hsvKeys = ["h", "s", "v"];
@@ -734,4 +751,8 @@ CNSI.content = {
   },
 };
 
-CNSI.content.init();
+try {
+  CNSI.content.init();
+} catch (error) {
+  console.error(`Content initialization error: ${error}`);
+}
