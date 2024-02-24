@@ -12,7 +12,7 @@ var CNSI = globalThis.CNSI || {};
 
 CNSI.data = {
   init: function () {
-    console.log("initializing data");
+    console.log("Initializing data");
 
     // Save corresponding rgb and hsl values onload so that we don't have to keep calculating it when using findClosestHex() onmousemove in
     // Uses functions from utilities.js
