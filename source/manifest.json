@@ -12,20 +12,12 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "scripts/utilities.js",
-        "scripts/data.js",
-        "scripts/content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["scripts/utilities.js", "scripts/data.js", "scripts/content.js"]
     }
   ],
   "externally_connectable": {
-    "matches": [
-      "*://*.google.com/*"
-    ]
+    "matches": ["*://*.google.com/*"]
   },
   "icons": {
     "16": "icons/16.png",
@@ -33,9 +25,5 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
-  "permissions": [
-    "activeTab",
-    "scripting",
-    "storage"
-  ]
+  "permissions": ["activeTab", "scripting", "storage"]
 }
