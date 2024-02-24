@@ -80,6 +80,7 @@ https://docs.github.com/en/communities/using-templates-to-encourage-useful-issue
 2.  In Terminal, create the distribution zip: `npm run dist`.
 3.  Unzip the file in dist/cnsi.zip.
 4.  [Install the local extension in your browser](https://superuser.com/questions/247651/how-does-one-install-an-extension-for-chrome-browser-from-the-local-file-system).
+
 ---
 
 ## ✏️ Note(s)
