@@ -3,7 +3,8 @@ name: Feature Request with Acceptance Criteria
 about: Suggest a user-facing idea for this project
 title: "[feature]: enter_summary_here"
 labels: enhancement
-assignees: ""
+assignees: ''
+
 ---
 
 ### [User Story](https://www.mountaingoatsoftware.com/agile/user-stories)
@@ -16,7 +17,7 @@ I want {function}
 So that {benefit}
 ```
 
-### Known Details of Existing Feature
+### Known Details and Assumptions
 
 <!-- [List any known details about existing feature that you would like enhanced.] -->
 
@@ -28,15 +29,10 @@ So that {benefit}
 
 -
 
-### Assumptions
 
-<!-- [List any assumptions that could affect this feature.  E.g., data sources, environments.] -->
+### Design Images
 
--
-
-### Screenshots
-
-<!-- [List any screenshots that will help illustrate this feature request.] -->
+<!-- [List any design images that will help illustrate this feature request.] -->
 
 -
 
