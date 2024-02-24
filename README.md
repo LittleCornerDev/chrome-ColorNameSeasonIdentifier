@@ -11,6 +11,11 @@ Is it a good shade of blue for "Deep Winter" or for "True Summer"? If you've eve
 
 PLEASE NOTE: The digital color detected is subject to your computer's as well as your browser's color profile settings. Different computers may not display a pixel exactly the same way. This extension can only provide a best guess based on the particular hex code detected using your current color profile settings.
 
+## HOW TO INSTALL
+
+- [From Chrome Web Store](https://chromewebstore.google.com/detail/color-name-season-identif/pddbkjjdhnmhmdeoaodeggedmebdhcgp)
+- [From Unzipped File](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+  
 ## FEATURES
 
 - Click extension icon to open/close color detection information.
@@ -26,14 +31,11 @@ PLEASE NOTE: The digital color detected is subject to your computer's as well as
 - https://en.wikipedia.org/wiki/Pantone
 - https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/which-colour-season-are-you
 
-## HOW TO INSTALL
 
-[Chrome Web Store](https://chromewebstore.google.com/detail/color-name-season-identif/pddbkjjdhnmhmdeoaodeggedmebdhcgp)
-[From Unzipped File](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
 
 ## CHANGES
 
-[CHANGELOG.md](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/blob/master/CHANGELOG.md)
+[CHANGELOG](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/blob/master/CHANGELOG.md)
 
 ## CONTRIBUTORS
 
