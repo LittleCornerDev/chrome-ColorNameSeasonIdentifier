@@ -1,5 +1,5 @@
-import { describe, expect, jest, test } from '@jest/globals';
-import { chrome } from 'jest-chrome';
+import { describe, expect, jest, test } from "@jest/globals";
+import { chrome } from "jest-chrome";
 import bg from "../../../source/scripts/background";
 
 describe.skip("background", () => {
