@@ -8,17 +8,16 @@
     "default_title": "Color Name Season Identifier"
   },
   "background": {
-    "service_worker": "scripts/background.js"
+    "service_worker": "scripts/background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "css": ["styles/content.css"],
       "js": ["scripts/utilities.js", "scripts/data.js", "scripts/content.js"]
     }
   ],
-  "externally_connectable": {
-    "matches": ["*://*.google.com/*"]
-  },
   "icons": {
     "16": "icons/16.png",
     "32": "icons/32.png",

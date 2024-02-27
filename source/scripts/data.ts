@@ -1,6 +1,6 @@
 /******************************************************************************
- * File: 	data.js
- * Summary: Color season mapping script for this Chrome Extension
+ * File: 	data.ts
+ * Summary:	Color season mapping script for this Chrome Extension
  * Author: 	Little Corner Dev (https://github.com/LittleCornerDev)
  *
  * Copyright (c) 2020, Little Corner Dev. All rights reserved.
@@ -8,17 +8,23 @@
  * found in the LICENSE file.
  */
 
-var CNSI = globalThis.CNSI || {};
+import {
+  ColorData,
+  ColorDataType,
+  ColorValueHex,
+  ColorValueHexNoHash,
+} from "./types";
+import { default as utils } from "./utilities";
 
-CNSI.data = {
+const CnsiData = {
   init: function () {
     console.log("Initializing data");
 
     // Save corresponding rgb and hsl values onload so that we don't have to keep calculating it when using findClosestHex() onmousemove in
     // Uses functions from utilities.js
-    Object.keys(CNSI.data.colors).forEach(function (hex, i) {
-      CNSI.data.colors[hex].rgb = CNSI.utils.hexToRGB(hex);
-      CNSI.data.colors[hex].hsl = CNSI.utils.hexToHSL(hex);
+    Object.keys(CnsiData.colors).forEach((hex, i) => {
+      CnsiData.colors[hex].rgb = utils.hexToRGB(hex);
+      CnsiData.colors[hex].hsl = utils.hexToHSL(hex);
     });
   },
 
@@ -26,43 +32,50 @@ CNSI.data = {
   // Triggered from onmousemove logic in content.js.
   // Info from
   // https://softwareengineering.stackexchange.com/questions/159830/nearest-color-algorithm-using-hex-triplet
-  findClosestHex: function (originHexCode, dataType) {
+  findClosestHex: function (
+    originHexCode: ColorValueHex,
+    dataType: ColorDataType,
+  ): ColorValueHexNoHash {
     if (dataType != "names" && dataType != "seasons") {
       dataType = "seasons";
     }
 
-    var rgb = CNSI.utils.hexToRGB(originHexCode);
-    var originR = rgb.r,
+    const rgb = utils.hexToRGB(originHexCode);
+    const originR = rgb.r,
       originG = rgb.g,
       originB = rgb.b;
 
-    var hsl = CNSI.utils.hexToHSL(originHexCode);
-    var originH = hsl.h,
+    const hsl = utils.hexToHSL(originHexCode);
+    const originH = hsl.h,
       originS = hsl.s,
       originL = hsl.l;
 
-    var rgbDiff = 0,
+    let rgbDiff = 0,
       hslDiff = 0,
       currentDiff = 0;
-    var closestHex = null,
+    let closestHex = "",
       smallestDiff = -1;
 
-    Object.keys(CNSI.data.colors).forEach(function (currentHex, i) {
+    Object.keys(CnsiData.colors).forEach((currentHex, i) => {
       //make sure we are only looking for colors with desired type info
-      if (CNSI.data.colors[currentHex][dataType] != null) {
+      if (CnsiData.colors[currentHex][dataType]) {
         //https://softwareengineering.stackexchange.com/questions/159830/nearest-color-algorithm-using-hex-triplet
-        rgbDiff = Math.sqrt(
-          Math.pow(originR - CNSI.data.colors[currentHex].rgb.r, 2) +
-            Math.pow(originG - CNSI.data.colors[currentHex].rgb.g, 2) +
-            Math.pow(originB - CNSI.data.colors[currentHex].rgb.b, 2),
-        );
-        hslDiff = Math.sqrt(
-          Math.pow(originH - CNSI.data.colors[currentHex].hsl.h, 2) +
-            Math.pow(originS - CNSI.data.colors[currentHex].hsl.s, 2) +
-            Math.pow(originL - CNSI.data.colors[currentHex].hsl.l, 2),
-        );
+        if (CnsiData.colors[currentHex].rgb) {
+          rgbDiff = Math.sqrt(
+            Math.pow(originR - CnsiData.colors[currentHex].rgb!.r, 2) +
+              Math.pow(originG - CnsiData.colors[currentHex].rgb!.g, 2) +
+              Math.pow(originB - CnsiData.colors[currentHex].rgb!.b, 2),
+          );
+        }
+        if (CnsiData.colors[currentHex].hsl) {
+          hslDiff = Math.sqrt(
+            Math.pow(originH - CnsiData.colors[currentHex].hsl!.h, 2) +
+              Math.pow(originS - CnsiData.colors[currentHex].hsl!.s, 2) +
+              Math.pow(originL - CnsiData.colors[currentHex].hsl!.l, 2),
+          );
+        }
 
-        //currentDiff = rgbDiff + hslDiff * 2;  //Not sure why this is used in http://chir.ag/projects/ntc/ntc.js
+        //currentDiff = rgbDiff + hslDiff * 2;	//Not sure why this is used in http://chir.ag/projects/ntc/ntc.js
         currentDiff = rgbDiff;
 
         if (smallestDiff < 0 || smallestDiff > currentDiff) {
@@ -76,35 +89,35 @@ CNSI.data = {
     return closestHex;
   },
 
-  getColorData: function (originHexCode, dataType) {
+  getColorData: function (
+    originHexCode: ColorValueHex,
+    dataType: ColorDataType,
+  ) {
     if (dataType != "names" && dataType != "seasons") {
       dataType = "seasons";
     }
 
-    var hex = CNSI.utils.getHexLowerNoHash(originHexCode);
+    const hex = utils.getHexLowerNoHash(originHexCode);
 
-    var data = null;
+    let data = null;
 
-    if (
-      CNSI.data.colors[hex] != null &&
-      CNSI.data.colors[hex][dataType] != null
-    ) {
+    if (CnsiData.colors[hex] && CnsiData.colors[hex][dataType]) {
       //console.log('exact ' + dataType + ' hex found for ' + hex);
-      data = CNSI.data.colors[hex][dataType];
-      data.hex = CNSI.utils.getHexUpperWithHash(hex);
-      data.isExactMatch = true;
+      data = CnsiData.colors[hex][dataType];
+      data!.hex = utils.getHexUpperWithHash(hex);
+      data!.isExactMatch = true;
     } else {
       //console.log('exact ' + dataType + ' hex NOT found for ' + hex + '... finding closest');
-      var closestHex = CNSI.data.findClosestHex(hex, dataType);
+      const closestHex = CnsiData.findClosestHex(hex, dataType);
       //console.log('closest ' + dataType + ' hex found: ' + closestHex);
 
       if (
-        CNSI.data.colors[closestHex] != null &&
-        CNSI.data.colors[closestHex][dataType] != null
+        CnsiData.colors[closestHex] != null &&
+        CnsiData.colors[closestHex][dataType] != null
       ) {
-        data = CNSI.data.colors[closestHex][dataType];
-        data.hex = CNSI.utils.getHexUpperWithHash(closestHex);
-        data.isExactMatch = false;
+        data = CnsiData.colors[closestHex][dataType];
+        data!.hex = utils.getHexUpperWithHash(closestHex);
+        data!.isExactMatch = false;
       }
     }
 
@@ -9201,7 +9214,9 @@ CNSI.data = {
         ],
       },
     },
-  },
+  } as ColorData,
 };
 
-CNSI.data.init();
+CnsiData.init();
+
+export default CnsiData;

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    //"baseUrl": "types",
+    "esModuleInterop": true,
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "noEmitOnError": true,
+    "outDir": "build",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES6"
+    //"typeRoots": ["node_modules/@types"]
+  },
+
+  "include": ["./source/**/*.ts"]
+}

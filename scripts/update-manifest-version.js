@@ -1,8 +1,8 @@
-const pjson = require("../package.json");
+import pjson from "../package.json";
 const version = pjson.version;
 console.log(`Detected version ${version} from package.json`);
 
-const editJsonFile = require("edit-json-file");
+import editJsonFile from "edit-json-file";
 
 // Load manifest.json
 // NOTE: If the file doesn't exist, the content will be an empty object by default.
