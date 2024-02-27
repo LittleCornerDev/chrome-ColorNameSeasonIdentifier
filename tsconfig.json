@@ -3,6 +3,7 @@
 		//"baseUrl": "types",
 		"esModuleInterop": true,
 		"module": "ES6",
+		"moduleResolution": "Node",
 		"noEmitOnError": true,
 		"outDir": "build",
 		"sourceMap": true,
