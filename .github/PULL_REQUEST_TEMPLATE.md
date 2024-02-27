@@ -3,7 +3,7 @@ GitHub Pull Request Template
 https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
 -->
 
-# chore|docs|feat|fix|perf|refactor|style|test(scope): Enter_Short_Title_Here [Issue #XX]
+# build|chore|docs|feat|fix|perf|refactor|style|test(scope): Enter_Short_Title_Here [Issue #XX]
 
 ## 📖 Description
 
@@ -67,7 +67,7 @@ https://docs.github.com/en/communities/using-templates-to-encourage-useful-issue
   - ( ) not affected
   - updated in
     - ( ) README.md
-    - ( ) JsDoc
+    - ( ) TsDoc
     - ( ) Wiki
 
 ---
