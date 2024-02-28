@@ -39,7 +39,7 @@
     "publish-dist": "npm run dist && dotenv cws-publish %GOOGLE_CLIENT_ID% %GOOGLE_CLIENT_SECRET% %GOOGLE_REFRESH__TOKEN% ./$npm_package_config_zipfile %GOOGLE_EXTENSION_ID%",
     "//format": "============================================================",
     "about:format": "echo 'Formatting Scripts'",
-    "format": "prettier --write **/*.{css,hbs,js,json,json5,md,ts}",
+    "format": "prettier --write **/*.{css,js,json,json5,md,ts}",
     "//install": "============================================================",
     "about:install": "echo 'Installation Scripts'",
     "postinstall": "if \"$IN_GHA\" ; then echo 'in GHA'; else echo 'not in GHA' && git config core.hooksPath ./hooks/ && echo 'hooks set up' ; fi ",
