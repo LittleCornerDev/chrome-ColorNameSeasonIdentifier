@@ -32,7 +32,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # token with workflow access is necessary in case commit steps need to update this
           # or any other workflow file.
@@ -44,7 +44,7 @@ jobs:
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
       - id: node
         name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
           cache: "npm"
