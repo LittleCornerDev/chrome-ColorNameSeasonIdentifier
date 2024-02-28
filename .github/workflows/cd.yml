@@ -46,6 +46,10 @@ jobs:
           git config user.email 'github-actions@users.noreply.github.com'
           git config user.name 'GitHub Actions'
 
+      - id: build
+        name: Build JS from TS
+        run: npm run build
+
       - id: bump
         if: startsWith(github.event.inputs.release-level, 'pre') != true
         name: Bump package version, create tag, and publish release
