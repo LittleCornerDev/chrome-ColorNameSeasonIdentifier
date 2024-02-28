@@ -1,41 +1,36 @@
-# Changelog All notable changes to this project will be documented in this file.
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic
-Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 {{#each releases}}
-  {{! if tag, it should be an actual release with an isoDate }}
-  {{#if tag}}
-    {{#if href}}
-      ## [{{title}}]({{href}}) -
-      {{isoDate}}
-    {{else}}
-      ##
-      {{title}}
-      -
-      {{isoDate}}
-    {{/if}}
-    {{! if no tag, it should be unreleased }}
-    {{! do not use title b/c it is same as last release and could be confusing }}
-  {{else}}
-    {{#if href}}
-      ## [Unreleased]({{href}})
-    {{else}}
-      ## Unreleased
-    {{/if}}
-  {{/if}}
+	{{! if tag, it should be an actual release with an isoDate }}
+	{{#if tag}}
+		{{#if href}}
+## [{{title}}]({{href}}) - {{isoDate}}
+		{{else}}
+## {{title}} - {{isoDate}}
+		{{/if}}
+		{{! if no tag, it should be unreleased }}
+		{{! do not use title b/c it is same as last release and could be confusing }}
+	{{else}}
+		{{#if href}}
+## [Unreleased]({{href}})
+		{{else}}
+## Unreleased
+		{{/if}}
+	{{/if}}
 
-  {{#if summary}}
-    Summary:
-    {{summary}}
-  {{/if}}
+	{{#if summary}}
+Summary: {{summary}}
+	{{/if}}
 
-  {{#if merges}}
-    {{#each merges}}
-      -
-      {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}}
-      {{#if href}}[`#{{id}}`]({{href}}){{/if}}
-    {{/each}}
-  {{/if}}
+	{{#if merges}}
+		{{#each merges}}
+- {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} {{#if href}}[`#{{id}}`]({{href}}){{/if}}
+		{{/each}}
+	{{/if}}
 
 {{/each}}

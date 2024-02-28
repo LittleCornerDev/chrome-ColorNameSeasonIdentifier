@@ -13,49 +13,49 @@ import webpack from 'webpack';
 const config: webpack.Configuration = {
 */
 const config = {
-  entry: {
-    background: path.resolve(__dirname, "source/scripts/background.ts"),
-    content: path.resolve(__dirname, "source/scripts/content.ts"),
-    data: path.resolve(__dirname, "source/scripts/data.ts"),
-    types: path.resolve(__dirname, "source/scripts/types.ts"),
-    utilities: path.resolve(__dirname, "source/scripts/utilities.ts"),
-  },
-  output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "scripts/[name].js",
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        { from: "source/*.json", to: "[name].json" },
-        { from: "source/icons/*", to: "icons/[name][ext]" },
-        { from: "source/styles/*", to: "styles/[name][ext]" },
-      ],
-    }),
-  ],
+	entry: {
+		background: path.resolve(__dirname, "source/scripts/background.ts"),
+		content: path.resolve(__dirname, "source/scripts/content.ts"),
+		data: path.resolve(__dirname, "source/scripts/data.ts"),
+		types: path.resolve(__dirname, "source/scripts/types.ts"),
+		utilities: path.resolve(__dirname, "source/scripts/utilities.ts"),
+	},
+	output: {
+		path: path.resolve(__dirname, "build"),
+		filename: "scripts/[name].js",
+	},
+	resolve: {
+		extensions: [".tsx", ".ts", ".js"],
+	},
+	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				loader: "ts-loader",
+				exclude: /node_modules/,
+			},
+		],
+	},
+	plugins: [
+		new CopyPlugin({
+			patterns: [
+				{ from: "source/*.json", to: "[name].json" },
+				{ from: "source/icons/*", to: "icons/[name][ext]" },
+				{ from: "source/styles/*", to: "styles/[name][ext]" },
+			],
+		}),
+	],
 };
 
 export default (env, argv) => {
-  if (argv.mode === "development") {
-    config.mode = "development";
-    config.devtool = "eval";
-  }
+	if (argv.mode === "development") {
+		config.mode = "development";
+		config.devtool = "eval";
+	}
 
-  if (argv.mode === "production") {
-    config.mode = "production";
-  }
+	if (argv.mode === "production") {
+		config.mode = "production";
+	}
 
-  return config;
+	return config;
 };
