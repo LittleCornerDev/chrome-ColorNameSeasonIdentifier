@@ -1,4 +1,6 @@
-import pjson from "../package.json";
+// Add assert due to ERR_IMPORT_ASSERTION_TYPE_MISSING error for Node >= 16.14.0
+// https://github.com/nodejs/node/releases/tag/v16.14.0
+import pjson from "../package.json" assert { type: "json" };
 const version = pjson.version;
 console.log(`Detected version ${version} from package.json`);
 
