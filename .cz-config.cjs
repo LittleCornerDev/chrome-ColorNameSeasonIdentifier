@@ -7,36 +7,79 @@
 // using the .cjs extension.
 // See https://github.com/leoforfree/cz-customizable/issues/199
 
+const scopes = [
+	{
+		name: 'config:      Changes to config files',
+		value: 'config'
+	},
+	{
+		name: 'icons:       Changes to source icon files',
+		value: 'icons'
+	},
+	{
+		name: 'scripts:     Changes to source script files',
+		value: 'scripts'
+	},
+	{
+		name: 'stylesheets: Changes to source css files',
+		name: 'stylesheets'
+	},
+	{
+		name: 'vcs:         Changes to version control files, including hooks and build scripts',
+		value: 'vcs'
+	},
+	{
+		name: '*:           Changes across multiple scopes',
+		value: '*'
+	} ];
 
 module.exports = {
 	types: [
-		{ value: 'feat', name: 'feat:     A new user-facing feature' },
-		{ value: 'fix', name: 'fix:      A user-facing bug fix' },
-		{ value: 'docs', name: 'docs:     Documentation-only changes (code comments|jsdoc|tsdoc|markdown)' },
 		{
-			value: 'style',
-			name: 'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
-		},
-		{
-			value: 'refactor',
-			name: 'refactor: A code change that neither fixes a bug nor adds a feature',
-		},
-		{
-			value: 'perf',
-			name: 'perf:     A code change that improves performance',
-		},
-		{ value: 'test', name: 'test:     Adding missing tests' },
-		{
-			value: 'chore',
 			name: 'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation',
+			value: 'chore',
 		},
-		{ value: 'revert', name: 'revert:   Revert to a commit' },
+		{
+			name: 'docs:     Documentation-only changes (code comments|jsdoc|tsdoc|markdown)',
+			value: 'docs'
+		},
+		{
+			name: 'feat:     A new user-facing feature',
+			value: 'feat'
+		},
+		{
+			name: 'fix:      A user-facing bug fix',
+			value: 'fix'
+		},
+		{
+			name: 'perf:     A code change that improves performance',
+			value: 'perf',
+		},
+		{
+			name: 'refactor: A code change that neither fixes a bug nor adds a feature',
+			value: 'refactor',
+		},
+		{
+			name: 'revert:   Revert to a commit',
+			value: 'revert',
+		},
+		{
+			name: 'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
+			value: 'style',
+		},
+		{
+			name: 'test:     Adding missing tests',
+			value: 'test',
+		},
 		// "WIP" may not be one of the default types checked by .commitlintrc
 		// might need to add this to .commitlintrc if we want to use it
-		//{ value: 'WIP', name: 'WIP:      Work in progress' },
+		/*{
+			name: 'WIP:      Work in progress',
+			value: 'WIP'
+		},*/
 	],
 
-	scopes: [ { name: 'config' }, { name: 'icons' }, { name: 'scripts' }, { name: 'stylesheets' }, { name: 'vcs' }, { name: '*' } ],
+	scopes: scopes,
 
 	// re-use commit from ./.git/COMMIT_EDITMSG?
 	usePreparedCommit: true,  //default false
@@ -52,23 +95,42 @@ module.exports = {
 	ticketNumberPrefix: '#',
 	ticketNumberRegExp: '\\d{1,5}',
 
-	// it needs to match the value for field type. Eg.: 'fix'
-	/*
+	// set specific scopes per type
 	scopeOverrides: {
-	  fix: [
-
-		{name: 'merge'},
-		{name: 'style'},
-		{name: 'e2eTest'},
-		{name: 'unitTest'}
-	  ]
+		docs: scopes.filter(s =>
+			s.value === "scripts" ||
+			s.value === "stylesheets" ||
+			s.value === "vcs" ||
+			s.value === "*"
+		),
+		feat: scopes.filter(s =>
+			s.value === "icons" ||
+			s.value === "scripts" ||
+			s.value === "stylesheets" ||
+			s.value === "*"
+		),
+		fix: scopes.filter(s =>
+			s.value === "icons" ||
+			s.value === "scripts" ||
+			s.value === "stylesheets" ||
+			s.value === "*"
+		),
+		style: scopes.filter(s =>
+			s.value === "scripts" ||
+			s.value === "stylesheets" ||
+			s.value === "vcs" ||
+			s.value === "*"
+		),
+		test: scopes.filter(s =>
+			s.value === "scripts"
+		)
 	},
-	*/
 
 	// override the messages, defaults are as follows
 	messages: {
-		type: "Select the type of change that you're committing:",
-		scope: '\nDenote the SCOPE of this change (optional):',
+		type: "Select the TYPE of change that you're committing:",
+		//scope: '\nDenote the SCOPE of this change (optional):',
+		scope: '\nDenote the SCOPE of this change:',
 		// used if allowCustomScopes is true
 		customScope: 'Denote the SCOPE of this change:',
 		subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
@@ -83,7 +145,7 @@ module.exports = {
 	allowCustomScopes: false, //default: false
 
 	// commit type that should have `breaking` message prompted
-	allowBreakingChanges: [ 'feat', 'fix' ], //default: none
+	allowBreakingChanges: [ 'chore', 'feat', 'fix', 'perf', 'refactor', 'revert' ], //default: none
 
 	// skip any questions you want
 	// skipQuestions: ['scope', 'body'], //default: none
