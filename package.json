@@ -3,6 +3,9 @@
 	"version": "0.3.1",
 	"description": "Chrome extension for identifying hex code, possible name, and possible wardrobe season for any pixel in the current tab page",
 	"config": {
+		"cz-customizable": {
+			"config": ".cz-config.cjs"
+		},
 		"zipfile": "dist/cnsi.zip"
 	},
 	"main": "dist/cnsi.zip",
@@ -98,7 +101,7 @@
 		"commitizen": "^4.3.0",
 		"copy-webpack-plugin": "^12.0.2",
 		"cws-publish": "^2.1.1",
-		"cz-conventional-changelog": "^3.3.0",
+		"cz-customizable": "^7.0.0",
 		"dotenv": "^16.4.5",
 		"edit-json-file": "^1.8.0",
 		"eslint": "^8.56.0",
