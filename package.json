@@ -3,6 +3,9 @@
 	"version": "0.3.1",
 	"description": "Chrome extension for identifying hex code, possible name, and possible wardrobe season for any pixel in the current tab page",
 	"config": {
+		"cz-customizable": {
+			"config": ".cz-config.cjs"
+		},
 		"zipfile": "dist/cnsi.zip"
 	},
 	"main": "dist/cnsi.zip",
@@ -63,7 +66,7 @@
 		"version:major": "npm version --no-commit-hooks --git-tag-version false major",
 		"version:minor": "npm version --no-commit-hooks --git-tag-version false minor",
 		"version:patch": "npm version --no-commit-hooks --git-tag-version false patch",
-		"version": "npm run version:get && node scripts/update-manifest-version.js && npx auto-changelog -l 100 -p -t changelog-template.hbs && git commit -nam \"build(vcs): Bump version to $npm_package_version\" && git tag -a \"v$npm_package_version\" -m \"v$npm_package_version\" ",
+		"version": "npm run version:get && node scripts/update-manifest-version.js && npx auto-changelog -l 100 -p -t changelog-template.hbs && git commit -nam \"chore(vcs): bump version to $npm_package_version\" && git tag -a \"v$npm_package_version\" -m \"v$npm_package_version\" ",
 		"postversion": "git push && git push --tags && npm run package:publish"
 	},
 	"repository": {
@@ -98,7 +101,7 @@
 		"commitizen": "^4.3.0",
 		"copy-webpack-plugin": "^12.0.2",
 		"cws-publish": "^2.1.1",
-		"cz-conventional-changelog": "^3.3.0",
+		"cz-customizable": "^7.0.0",
 		"dotenv": "^16.4.5",
 		"edit-json-file": "^1.8.0",
 		"eslint": "^8.56.0",
