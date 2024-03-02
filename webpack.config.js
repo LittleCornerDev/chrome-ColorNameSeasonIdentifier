@@ -26,7 +26,7 @@ const config = {
 		filename: "scripts/[name].js",
 	},
 	resolve: {
-		extensions: [ ".tsx", ".ts", ".js" ],
+		extensions: [".tsx", ".ts", ".js"],
 	},
 	module: {
 		rules: [
@@ -69,7 +69,7 @@ export default (env, argv) => {
 						compress: {
 							// drop console.debug, console.info, console.log
 							// keep console.error, console.trace, console.warn
-							drop_console: [ 'debug', 'info', 'log' ],
+							drop_console: ["debug", "info", "log"],
 						},
 						// sourceMap options:
 						// https://github.com/terser/terser?tab=readme-ov-file#source-map-options
