@@ -3,7 +3,8 @@ GitHub Pull Request Template
 https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
 -->
 
-# build|chore|docs|feat|fix|perf|refactor|style|test(scope): Enter_Short_Title_Here [Issue #XX]
+<!--[Enter type, scope, and summary.  Possible types: chore, docs, feat, fix, perf, refactor, revert, style, test.  Possible scopes: config, icons, scripts, stylesheets, vcs, *] -->
+# type(scope): Enter_Short_Title_Here [Issue #XX]
 
 ## 📖 Description
 
