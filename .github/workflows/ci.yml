@@ -78,5 +78,5 @@ jobs:
         name: Commit format fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "refactor(*): fix format errors"
+          commit_message: "style(*): fix format errors"
           branch: ${{ github.head_ref }}
