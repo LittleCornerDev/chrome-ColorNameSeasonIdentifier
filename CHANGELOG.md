@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.3.0](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/compare/v0.2.0...v0.3.0) - 2024-02-29
 
-- build(*): fix prettier [`#23`](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/pull/23)
+- build(\*): fix prettier [`#23`](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/pull/23)
 - build(scripts): convert source code to typescript [`#13`](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/pull/13)
 
 ## [v0.2.0](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/compare/v0.1.0...v0.2.0) - 2024-02-24
