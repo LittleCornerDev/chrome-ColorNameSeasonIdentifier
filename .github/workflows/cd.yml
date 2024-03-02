@@ -24,6 +24,12 @@ jobs:
       - id: checkout
         name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # fetch all commit and tag history for all branches.
+          # this is needed by the auto-changelog to be able to
+          # generate logs from all tags.
+          fetch-depth: 0
+          # using default ${{github.token}} token is sufficient
 
       - id: nvmrc
         name: Read .nvmrc
