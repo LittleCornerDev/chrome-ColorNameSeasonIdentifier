@@ -1,6 +1,7 @@
 import path from "path";
 import CopyPlugin from "copy-webpack-plugin";
 import { fileURLToPath } from "url";
+import TerserPlugin from "terser-webpack-plugin";
 
 // Because __dirname available for CommonJS but not Module JS
 // https://iamwebwiz.medium.com/how-to-fix-dirname-is-not-defined-in-es-module-scope-34d94a86694d
@@ -55,6 +56,28 @@ export default (env, argv) => {
 
 	if (argv.mode === "production") {
 		config.mode = "production";
+		config.optimization = {
+			minimize: true,
+			minimizer: [
+				new TerserPlugin({
+					// sourceMap minify option true if using source-maps in production
+					// requires setting corresponding sourceMap object compress option
+					//sourceMap: true,
+					terserOptions: {
+						// compress options:
+						// https://github.com/terser/terser?tab=readme-ov-file#compress-options
+						compress: {
+							// drop console.debug, console.info, console.log
+							// keep console.error, console.trace, console.warn
+							drop_console: ["debug", "info", "log"],
+						},
+						// sourceMap options:
+						// https://github.com/terser/terser?tab=readme-ov-file#source-map-options
+						//sourceMap: {},
+					},
+				}),
+			],
+		};
 	}
 
 	return config;
