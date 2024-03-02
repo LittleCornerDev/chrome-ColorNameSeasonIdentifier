@@ -3,6 +3,7 @@
 ![Build Status](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/actions/workflows/ci.yml/badge.svg)
 ![Release Status](https://github.com/LittleCornerDev/chrome-ColorNameSeasonIdentifier/actions/workflows/cd.yml/badge.svg)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Known Vulnerabilities](https://snyk.io/test/github/LittleCornerDev/chrome-ColorNameSeasonIdentifier/badge.svg)](https://snyk.io/test/github/LittleCornerDev/chrome-ColorNameSeasonIdentifier)
 
 Identifies hex code, possible name, and possible wardrobe season for any pixel in the current tab page.
 Is it "khaki", or is it "beige"? Now you'll know what that color is probably called... by finding the closest match from digital standards like X11 and W3C as well as approximations of non-digital color sources like Crayola crayons.
