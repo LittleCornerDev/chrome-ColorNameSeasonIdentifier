@@ -4,6 +4,7 @@ https://docs.github.com/en/communities/using-templates-to-encourage-useful-issue
 -->
 
 <!--[Enter type, scope, and summary.  Possible types: chore, docs, feat, fix, perf, refactor, revert, style, test.  Possible scopes: config, icons, scripts, stylesheets, vcs, *] -->
+
 # type(scope): Enter_Short_Title_Here [Issue #XX]
 
 ## 📖 Description
