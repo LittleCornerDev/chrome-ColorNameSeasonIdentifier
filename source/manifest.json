@@ -1,32 +1,40 @@
 {
-	"manifest_version": 3,
-	"name": "Color Name Season Identifier",
-	"description": "Identifies hex code, possible name, and possible wardrobe season for any pixel in the current tab page.",
-	"version": "0.3.0",
-	"action": {
-		"default_icon": "icons/32.png",
-		"default_title": "Color Name Season Identifier"
-	},
-	"background": {
-		"service_worker": "scripts/background.js",
-		"type": "module"
-	},
-	"content_scripts": [
-		{
-			"matches": ["<all_urls>"],
-			"css": ["styles/content.css"],
-			"js": [
-				"scripts/utilities.js",
-				"scripts/data.js",
-				"scripts/content.js"
-			]
-		}
-	],
-	"icons": {
-		"16": "icons/16.png",
-		"32": "icons/32.png",
-		"48": "icons/48.png",
-		"128": "icons/128.png"
-	},
-	"permissions": ["activeTab", "scripting", "storage"]
+  "manifest_version": 3,
+  "name": "Color Name Season Identifier",
+  "description": "Identifies hex code, possible name, and possible wardrobe season for any pixel in the current tab page.",
+  "version": "0.3.1",
+  "action": {
+    "default_icon": "icons/32.png",
+    "default_title": "Color Name Season Identifier"
+  },
+  "background": {
+    "service_worker": "scripts/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/utilities.js",
+        "scripts/data.js",
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ]
 }
